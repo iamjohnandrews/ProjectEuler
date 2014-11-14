@@ -16,12 +16,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+}
 
+
+- (void)largestPalindromeFromTwo3digitNumbers
+{
+    
 }
 
 - (void)largestPrimeFactorOf600851475143
 {
+    long long divisibleNumber = 600851475143;
+    NSMutableArray *factorsArray = [NSMutableArray array];
+
+    for (long long i = 1; i < divisibleNumber; i++) {
+        if (divisibleNumber % i == 0) {
+            NSLog(@"%lld is a factor of %lld", i, divisibleNumber);
+            
+            if ([self checkIfValueIsaPrimeNumber:i]) {
+                [factorsArray addObject:[NSNumber numberWithLongLong:i]];
+                NSLog(@"%lld is a PRIME factor of %lld", i, divisibleNumber);
+            }
+        }
+    }
     
+    NSNumber *largestPrimeFactor = [factorsArray valueForKeyPath:@"@max.self"];
+    NSLog(@"largestPrimeFactor of %lld is =%@", divisibleNumber, largestPrimeFactor);
+}
+
+- (BOOL)checkIfValueIsaPrimeNumber:(long long)number
+{
+    BOOL isPrimeNumber = NO;
+    NSMutableArray *factorsArray = [NSMutableArray array];
+    
+    for (long long i = 2; i < number; i++) {
+        if (number % i == 0) {
+            [factorsArray addObject:[NSNumber numberWithLongLong:i]];
+        }
+    }
+    
+    if (!factorsArray.count) {
+        isPrimeNumber = YES;
+    }
+    
+    return isPrimeNumber;
 }
 
 - (void)findSumOfEvenValuedFibonacciValuesLessThan4Million
